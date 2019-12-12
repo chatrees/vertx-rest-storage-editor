@@ -6,6 +6,7 @@ document.getElementById("home-button").href = settings.homeUrl;
 function paramSelected(value) {
     var selected = getParameterByName('selected');
     var treeBase = getParameterByName('treeBase');
+    treeBase = decodeURIComponent(treeBase);
     // fix probably wrong uri with tree base instead without
     if (selected) {
         selected = selected.replace(treeBase, '')
@@ -260,7 +261,8 @@ $(function ($) {
     if (!treeBase) {
         treeBase = '/';
     }
-    if (!treeBase.endsWith('/')) {
+    treeBase = decodeURIComponent(treeBase);
+    if (treeBase.indexOf('?') === -1 && !treeBase.endsWith('/')) {
         treeBase += '/';
     }
     var ROOT_NODES = [{
